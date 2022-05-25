@@ -33,13 +33,13 @@ class RockPaperScissors {
    * @param {string} cpuSelection computer selection. Can only be one of the following values [`rock`, `paper`, `scissors`]
    */
   determineWinner(userSelection, cpuSelection){
-    if(userSelection === cpuSelection){
+    if(userSelection.toLowerCase() == cpuSelection){
       return "tie";
     }
     else if(
-      (userSelection == "rock" && cpuSelection == "scissors")||
-      (userSelection == "paper" && cpuSelection == "rock")||
-      (userSelection == "scissors" && cpuSelection == "paper")
+      (userSelection.toLowerCase() == "rock" && cpuSelection == "scissors")||
+      (userSelection.toLowerCase() == "paper" && cpuSelection == "rock")||
+      (userSelection.toLowerCase() == "scissors" && cpuSelection == "paper")
     ){
       return "win";
     }
@@ -54,14 +54,18 @@ class RockPaperScissors {
    * @param {string} userSelection user selection. Can only be one of the following values [`rock`, `paper`, `scissors`]
    */
   play(userSelection){
+    //let userSelection = userSelection.toLowerCase();
     let cpuSelection = this.generateCPUResponse();
     if(this.determineWinner(userSelection, cpuSelection) == "win"){
       this.score.user++;
-      this.gameHistoryLog.push(this.username.user + " selected " + userSelection + ", CPU selected " + cpuSelection + ": " + this.username.user + " wins!")
+      this.gameHistoryLog.push(this.username + " selected " + userSelection + ", CPU selected " + cpuSelection + ": " + this.username + " wins!");
     }
     else if(this.determineWinner(userSelection, cpuSelection) == "lose"){
       this.score.cpu++;
-      this.gameHistoryLog.push(this.username.user + " selected " + userSelection + ", CPU selected " + cpuSelection + ": CPU wins!")
+      this.gameHistoryLog.push(this.username + " selected " + userSelection + ", CPU selected " + cpuSelection + ": CPU wins!");
+    }
+    else{
+      this.gameHistoryLog.push(this.username + " selected " + userSelection + ", CPU selected " + cpuSelection + ": There was a tie!");
     }
   }
 }
